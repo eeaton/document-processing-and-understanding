@@ -51,7 +51,7 @@ apache-airflow-providers-common-sql==1.14.1
     #   apache-airflow-providers-sqlite
 apache-airflow-providers-fab==1.2.0
     # via apache-airflow
-apache-airflow-providers-ftp==3.10.0
+apache-airflow-providers-ftp==3.11.0
     # via apache-airflow
 apache-airflow-providers-google==10.15.0
     # via -r reqs/../components/dpu-workflow/requirements.in
