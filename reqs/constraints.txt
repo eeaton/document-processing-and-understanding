@@ -9,7 +9,7 @@
     #   -r reqs/requirements_all.in
     #   processor-msg
     # via -r reqs/requirements_all.in
-aiofiles==23.2.1
+aiofiles==24.1.0
     # via gcloud-aio-storage
 aiohttp==3.9.5
     # via
