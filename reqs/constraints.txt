@@ -386,7 +386,7 @@ google-auth-oauthlib==1.2.0
     #   google-ads
     #   pandas-gbq
     #   pydata-google-auth
-google-cloud-aiplatform==1.56.0
+google-cloud-aiplatform==1.64.0
     # via
     #   apache-airflow-providers-google
     #   processor-web-ui
