@@ -16,4 +16,4 @@ jobs:
         cache: 'pip' # caching pip dependencies
     - run: invoke.sh
 #      run: pip install -r requirements.txt
-    - uses: cloudposse/github-action-pre-commit@v2.1.2
+    - uses: cloudposse/github-action-pre-commit@v4.0.0
