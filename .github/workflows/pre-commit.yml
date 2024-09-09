@@ -1,19 +1,32 @@
-name: pre-commit
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-on:
-  pull_request:
-  push:
-    branches: [master]
+---
+  name: CI
 
-jobs:
-  pre-commit:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v5
-      with:
-        python-version: 'pypy3.9'
-        cache: 'pip' # caching pip dependencies
-    - run: bash invoke.sh
-#      run: pip ins tall -r requirements.txt
-    - uses: cloudposse/github-action-pre-commit@v2.1.2
+  on: [push, pull_request]
+
+  jobs:
+    lint:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 0
+        - name: Super-Linter
+          uses: super-linter/super-linter/slim@v6.6.0
+          env:
+            VALIDATE_ALL_CODEBASE: true
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
