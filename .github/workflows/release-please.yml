@@ -2,9 +2,8 @@ on:
   push:
     branches:
       - main
-
+      - 'hotfix/**'
 name: release-please
-
 jobs:
   release-please:
     runs-on: ubuntu-latest
@@ -12,3 +11,6 @@ jobs:
       - uses: googleapis/release-please-action@v4
         with:
           release-type: simple
+          # The short ref name of the branch or tag that triggered
+          #  the workflow run. For example, `main` or `hotfix/urgent-bugfix`
+          target-branch: ${{ github.ref_name }}
