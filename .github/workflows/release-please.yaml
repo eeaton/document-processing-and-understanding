@@ -1,6 +1,8 @@
 on:
     push:
-      branches: main
+      branches:
+        - main
+        - 1.x
   name: release-please
   jobs:
     release-please:
@@ -10,5 +12,5 @@ on:
           with:
             release-type: node
             # The short ref name of the branch or tag that triggered
-            #  the workflow run. For example, `main` or `hotfix/urgent-bugfix`
+            #  the workflow run. For example, `main` or `1.x`
             target-branch: ${{ github.ref_name }}
