@@ -46,4 +46,3 @@
           - name: Terraform validate
             working-directory: terraform
             run: terraform validate
-    ...
