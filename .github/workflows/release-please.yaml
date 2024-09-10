@@ -2,7 +2,7 @@ on:
     push:
       branches:
         - main
-          1.x
+          foo
   name: release-please
   jobs:
     release-please:
