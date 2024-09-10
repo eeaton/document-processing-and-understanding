@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/eeaton/document-processing-and-understanding/compare/v2.0.0...v2.1.0) (2024-09-10)
+
+
+### Features
+
+* add feature for 2.1 ([6e64d12](https://github.com/eeaton/document-processing-and-understanding/commit/6e64d12d3aea583a36104bde523e504f9798dec2))
+
 ## [2.0.0](https://github.com/eeaton/document-processing-and-understanding/compare/1.2.1...v2.0.0) (2024-09-10)
 
 
