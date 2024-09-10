@@ -2,7 +2,7 @@ on:
     push:
       branches:
         - main
-        - 'hotfix/**'
+        - 'hotfix/*'
   name: release-please
   jobs:
     release-please:
