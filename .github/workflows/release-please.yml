@@ -12,5 +12,5 @@ jobs:
         with:
           release-type: simple
           # The short ref name of the branch or tag that triggered
-          #  the workflow run. For example,derpderp `main` or `hotfix/urgent-bugfix`
+          #  the workflow run. For example,derpderp `main` or `hotfix/urgent-bugfix`. derp
           target-branch: ${{ github.ref_name }}
