@@ -44,5 +44,5 @@
             working-directory: sample-deployments/composer-orchestrated-process
             run: terraform init
           - name: Terraform validate
-            working-directory: terraform
+            working-directory: sample-deployments/composer-orchestrated-process
             run: terraform validate
