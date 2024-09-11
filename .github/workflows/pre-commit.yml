@@ -14,6 +14,7 @@ jobs:
       with:
         python-version: "3.11"
     - run: pip install pyproject.toml
+    - run: pip install -r reqs/requirements_all.txt
 #    - uses: yezz123/setup-uv@v4
 #
 #    - uses: cloudposse/github-action-pre-commit@v2.1.2
