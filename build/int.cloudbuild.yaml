@@ -29,6 +29,16 @@ steps:
         gcloud billing projects link $${TEST_PROJECT_ID} --billing-account=${01F47E-C3F93E-C50E1B} ;
         gcloud services enable --project $${TEST_PROJECT_ID} appengine.googleapis.com cloudbuild.googleapis.com cloudfunctions.googleapis.com cloudresourcemanager.googleapis.com cloudscheduler.googleapis.com firestore.googleapis.com iam.googleapis.com pubsub.googleapis.com spanner.googleapis.com ;
 
+  - id: cleanup
+    name: gcr.io/cloud-builders/gcloud-slim
+    args:
+      - "-x"
+      - "-c"
+      - >-
+        export TEST_PROJECT_ID=eks-int-${SHORT_SHA} ;
+        gcloud projects delete $${TEST_PROJECT_ID} --quiet
+    entrypoint: /bin/bash
+
 tags:
   - "ci"
   - "integration"
