@@ -29,12 +29,11 @@ steps:
         gcloud billing projects link $${TEST_PROJECT_ID} --billing-account=${_BILLING_ACCOUNT} ;
 
   - id: pre_tf_setup
-    name: gcr.io/cloud-builders/gcloud-slim
+    name: gcr.io/cloud-builders/gcloud
     entrypoint: /bin/bash
     args:
       - "-c"
       - >- # folded text - replace newlines with spaces - each command needs to be separated by ';'
-        ls;
         cd sample-deployments/composer-orchestrated-process;
         scripts/pre_tf_setup.sh;
 
