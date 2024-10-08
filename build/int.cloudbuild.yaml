@@ -26,7 +26,7 @@ steps:
         gcloud projects create $${TEST_PROJECT_ID} --folder ${_FOLDER_ID} ;
         sleep 10 ;
         trap "gcloud projects delete --quiet $${TEST_PROJECT_ID}" ERR ;
-        gcloud billing projects link $${TEST_PROJECT_ID} --billing-account=${01F47E-C3F93E-C50E1B} ;
+        gcloud billing projects link $${TEST_PROJECT_ID} --billing-account=${_BILLING_ACCOUNT} ;
         gcloud services enable --project $${TEST_PROJECT_ID} appengine.googleapis.com cloudbuild.googleapis.com cloudfunctions.googleapis.com cloudresourcemanager.googleapis.com cloudscheduler.googleapis.com firestore.googleapis.com iam.googleapis.com pubsub.googleapis.com spanner.googleapis.com ;
 
   - id: cleanup
