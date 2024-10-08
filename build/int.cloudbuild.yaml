@@ -23,12 +23,12 @@ steps:
       - "-c"
       - >- # folded text - replace newlines with spaces - each command needs to be separated by ';'
         # export TEST_PROJECT_ID=eks-int-${SHORT_SHA} ;
-        gcloud projects create $${PROJECT_ID} --folder ${_FOLDER_ID} ;
+        gcloud projects create ${_PROJECT_ID} --folder ${_FOLDER_ID} ;
         sleep 10 ;
-        trap "gcloud projects delete --quiet $${ROJECT_ID}" ERR ;
-        gcloud billing projects link $${PROJECT_ID} --billing-account=${_BILLING_ACCOUNT} ;
+        trap "gcloud projects delete --quiet $${_PROJECT_ID}" ERR ;
+        gcloud billing projects link ${_PROJECT_ID} --billing-account=${_BILLING_ACCOUNT} ;
     env:
-      - "PROJECT_ID=${PROJECT_ID}"
+      - "PROJECT_ID=${_PROJECT_ID}"
 
   - id: pre_tf_setup
     name: "gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
@@ -61,6 +61,6 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 substitutions:
-  PROJECT_ID: "eks-int-${SHORT_SHA}"
+  _PROJECT_ID: "eks-int-${SHORT_SHA}"
   _DOCKER_IMAGE_DEVELOPER_TOOLS: "cft/developer-tools"
   _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: "1.22"
