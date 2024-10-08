@@ -22,11 +22,13 @@ steps:
       - "-x"
       - "-c"
       - >- # folded text - replace newlines with spaces - each command needs to be separated by ';'
-        export TEST_PROJECT_ID=eks-int-${SHORT_SHA} ;
-        gcloud projects create $${TEST_PROJECT_ID} --folder ${_FOLDER_ID} ;
+        # export TEST_PROJECT_ID=eks-int-${SHORT_SHA} ;
+        gcloud projects create $${PROJECT_ID} --folder ${_FOLDER_ID} ;
         sleep 10 ;
-        trap "gcloud projects delete --quiet $${TEST_PROJECT_ID}" ERR ;
-        gcloud billing projects link $${TEST_PROJECT_ID} --billing-account=${_BILLING_ACCOUNT} ;
+        trap "gcloud projects delete --quiet $${ROJECT_ID}" ERR ;
+        gcloud billing projects link $${PROJECT_ID} --billing-account=${_BILLING_ACCOUNT} ;
+    env:
+      - "PROJECT_ID=${PROJECT_ID}"
 
   - id: pre_tf_setup
     name: "gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS"
@@ -36,6 +38,10 @@ steps:
       - >- # folded text - replace newlines with spaces - each command needs to be separated by ';'
         cd sample-deployments/composer-orchestrated-process;
         scripts/pre_tf_setup.sh;
+    env:
+      - "PROJECT_ID=${PROJECT_ID}"
+      - "REGION=us-central1"
+      - "IAP_ADMIN_ACCOUNT='elliot@ellioteaton.altostrat.com'"
 
   - id: cleanup
     name: gcr.io/cloud-builders/gcloud-slim
@@ -55,5 +61,6 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 substitutions:
+  PROJECT_ID: "eks-int-${SHORT_SHA}"
   _DOCKER_IMAGE_DEVELOPER_TOOLS: "cft/developer-tools"
   _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: "1.22"
