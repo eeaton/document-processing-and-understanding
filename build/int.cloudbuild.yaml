@@ -27,7 +27,13 @@ steps:
         sleep 10 ;
         trap "gcloud projects delete --quiet $${TEST_PROJECT_ID}" ERR ;
         gcloud billing projects link $${TEST_PROJECT_ID} --billing-account=${_BILLING_ACCOUNT} ;
-        gcloud services enable --project $${TEST_PROJECT_ID} appengine.googleapis.com cloudbuild.googleapis.com cloudfunctions.googleapis.com cloudresourcemanager.googleapis.com cloudscheduler.googleapis.com firestore.googleapis.com iam.googleapis.com pubsub.googleapis.com spanner.googleapis.com ;
+
+  - id: pre_tf_setup
+    name: "bash"
+    args:
+      [
+        "sample-deployments/composer-orchestrated-process/scripts/pre_tf_setup.sh",
+      ]
 
   - id: cleanup
     name: gcr.io/cloud-builders/gcloud-slim
