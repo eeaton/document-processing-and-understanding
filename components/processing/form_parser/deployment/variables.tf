@@ -47,7 +47,7 @@ variable "dpu_run_service_account_display_name" {
   default     = "service account name for Cloud Run Job running DocAI Form Parser"
 }
 
-variable "cloud_run_job_name" {
+variable "form_parser_cloud_run_job_name" {
   description = "Google Cloud region where compute services are located."
   type        = string
   default     = "dpu-form-parser"
@@ -63,4 +63,9 @@ variable "gcs_input_prefix" {
   description = "Google Cloud region where compute services are located."
   type        = string
   default     = "gs://doc-ai-processor/input-forms/"
+}
+
+variable "alloydb_cluster_name" {
+  description = "Name of the AlloyDB cluster to save the parsed forms results"
+  type        = string
 }
