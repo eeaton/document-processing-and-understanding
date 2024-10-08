@@ -22,7 +22,7 @@ steps:
       - "-x"
       - "-c"
       - >- # folded text - replace newlines with spaces - each command needs to be separated by ';'
-        export TEST_PROJECT_ID=${TRIGGER_NAME}-${_PROJECT_SUFFIX} ;
+        export TEST_PROJECT_ID=${TRIGGER_NAME}-${SHORT_SHA} ;
         gcloud projects create $${TEST_PROJECT_ID} --folder ${_FOLDER_ID} ;
         sleep 10 ;
         trap "gcloud projects delete --quiet $${TEST_PROJECT_ID}" ERR ;
