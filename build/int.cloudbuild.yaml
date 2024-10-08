@@ -35,7 +35,8 @@ steps:
       - "-c"
       - >- # folded text - replace newlines with spaces - each command needs to be separated by ';'
         ls;
-        sample-deployments/composer-orchestrated-process/scripts/pre_tf_setup.sh;
+        cd sample-deployments/composer-orchestrated-process;
+        scripts/pre_tf_setup.sh;
 
   - id: cleanup
     name: gcr.io/cloud-builders/gcloud-slim
