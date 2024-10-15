@@ -40,8 +40,7 @@ module "gcloud_app_build" {
       --region ${var.region} \
       --config ${local_file.cloudbuild_config.filename} \
       --default-buckets-behavior=regional-user-owned-bucket \
-      --service-account "projects/${var.project_id}/serviceAccounts/deployer@${var.project_id}.iam.gserviceaccount.com"
-
+      --service-account "projects/${var.project_id}/serviceAccounts/${var.build_service_acccount}"
   EOT
   enabled               = true
 
