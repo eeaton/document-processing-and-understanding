@@ -14,25 +14,32 @@
 
 
 locals {
-  cloud_build_fileset = fileset("${path.module}/src/", "**/*")
-  cloud_build_content_hash = sha512(join("", [for f in local.cloud_build_fileset : fileexists(f) ? filesha512(f) :
-  sha512("file-not-found")]))
+  classifier_cloud_build_content_hash = sha512(
+    join("", [
+      for f in fileset(path.module, "../src/**") :
+      filesha512("${path.module}/${f}")
+      ]
+    )
+  )
   service_account_name = var.classifier_cloud_run_job_name
 }
 
 # See github.com/terraform-google-modules/terraform-google-gcloud
-module "gcloud" {
+module "gcloud_build_doc_classifier" {
   source                = "github.com/terraform-google-modules/terraform-google-gcloud?ref=db25ab9c0e9f2034e45b0034f8edb473dde3e4ff" # commit hash of version 3.5.0
   create_cmd_entrypoint = "gcloud"
   create_cmd_body       = <<-EOT
-    builds submit ${path.module}/../src \
+    auth configure-docker ${var.region}-docker.pkg.dev && \
+    gcloud builds submit ${path.module}/../src \
       --pack image=${local.image_name_and_tag} \
       --project ${var.project_id} \
-      --region ${var.region}
+      --region ${var.region} \
+      --default-buckets-behavior=regional-user-owned-bucket \
+      --service-account "projects/${var.project_id}/serviceAccounts/${var.build_service_acccount}"
   EOT
   enabled               = true
 
   create_cmd_triggers = {
-    source_contents_hash = local.cloud_build_content_hash
+    source_contents_hash = local.classifier_cloud_build_content_hash
   }
 }

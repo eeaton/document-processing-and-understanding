@@ -1,4 +1,4 @@
-# Copyright 2024 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,17 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-terraform {
-  required_version = ">=1.5.7"
+test-e2e:	## Run the end-to-end test
+	@echo "Running E2E test..."
+	@go test -v -run ./ -timeout 30m --tags=e2e
 
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = ">= 5.23.0"
-    }
-  }
+.PHONY: help
+.DEFAULT_GOAL := help
 
-  provider_meta "google" {
-    module_name = "cloud-solutions/eks-docai-v1"
-  }
-}
+help:
+	@fgrep -h "##" $(MAKEFILE_LIST) | sed -e 's/\(\:.*\#\#\)/\:\ /' | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
