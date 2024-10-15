@@ -178,22 +178,11 @@ elif [ "$MODE" = "batch" ]; then
         -H "x-goog-user-project: $PROJECT_ID" \
         "${DELETE_URI}"
 
-      gsutil rm -r "$DOC_URI"
-      # Conditional logic for DocAI form parser output
-      if [[ $DOC_URI == *"pdf-forms"* && $DOC_URI == *.txt ]]; then
-        JSON_URI="${DOC_URI%.txt}.json"
-        gsutil rm -r "$JSON_URI"
-      else
-        gsutil rm -r "$DOC_URI".json
-      fi
-
       bq query --use_legacy_sql=false --project_id="$PROJECT_ID" \
         "DELETE FROM \`$BQ_TABLE\` WHERE id = '$DOC_ID'"
 
       echo "Document with ID '$DOC_ID' successfully deleted from DP&U."
     done <<<"$RESULTS"
-
-    bq rm --project_id="$PROJECT_ID" --headless=true -f -t "$BQ_TABLE"
   fi
 
   # Delete the GCS folder associated with the batch ID
