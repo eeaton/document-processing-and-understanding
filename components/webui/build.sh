@@ -14,9 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+cp "$HOME"/.config/gcloud/application_default_credentials.json ./adc.json
 
-cp $HOME/.config/gcloud/application_default_credentials.json ./adc.json
-
-gcloud builds submit --tag "$AR_REPO_LOCATION-docker.pkg.dev/$GOOGLE_CLOUD_PROJECT/$AR_REPO/$SERVICE_NAME"
+gcloud builds submit --tag "$AR_REPO_LOCATION-docker.pkg.dev/$GOOGLE_CLOUD_PROJECT/$AR_REPO/$SERVICE_NAME" --service-account "projects/$GOOGLE_CLOUD_PROJECT/serviceAccounts/deployer@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com"
 
 rm ./adc.json

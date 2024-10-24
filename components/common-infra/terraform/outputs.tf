@@ -16,6 +16,11 @@ output "artifact_repo" {
   value       = google_artifact_registry_repository.docker-repo
 }
 
+output "cloud_build_service_account" {
+  description = "IAM service account to run builds on top of Cloud Build"
+  value       = module.cloud_build_account
+}
+
 output "project_id" {
   description = "Google Cloud project user by the module."
   value       = module.project_services.project_id
@@ -47,4 +52,13 @@ output "vpc_network_id" {
 
 output "vpc_network_name" {
   value = module.vpc.network_name
+}
+
+output "alloydb_cluster_name" {
+  value = module.docs_results.cluster_name
+}
+
+output "wait" {
+  description = "creating the alloydb resource in terraform does not guarantee it's in the ready state, so subsequent steps fail. This resource exists to force a sleep_timer that is referencable from other modules "
+  value       = time_sleep.wait_for_alloydb_ready_state
 }
