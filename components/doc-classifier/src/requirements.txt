@@ -124,7 +124,7 @@ googleapis-common-protos==1.65.0 \
     --hash=sha256:2972e6c496f435b92590fd54045060867f3fe9be2c82ab148fc8885035479a63 \
     --hash=sha256:334a29d07cddc3aa01dee4988f9afd9b2916ee2ff49d6b757155dc0d197852c0
     # via
-    #   -c reqs/constraints.txt
+    #   -c reqs/constraints.txt dertp
     #   google-api-core
     #   grpcio-status
 grpcio==1.66.1 \
