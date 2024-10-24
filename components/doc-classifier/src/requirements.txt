@@ -112,13 +112,8 @@ google-api-core==2.20.0 \
     # via
     #   -c reqs/constraints.txt
     #   google-cloud-documentai
-google-auth==2.35.0 \
-    --hash=sha256:25df55f327ef021de8be50bad0dfd4a916ad0de96da86cd05661c9297723ad3f \
-    --hash=sha256:f4c64ed4e01e8e8b646ef34c018f8bf3338df0c8e37d8b3bba40e7f574a3278a
-    # via
-    #   -c reqs/constraints.txt
-    #   google-api-core
-    #   google-cloud-documentai
+google-auth==99.35.0
+
 google-cloud-documentai==2.32.0 \
     --hash=sha256:43ded2341cce2e3d6fc27271925324646a508843e7e1a641778005756511f3cb \
     --hash=sha256:70bb38501734fa806585d35e475dde8276e1cbaaf2554374060b79b3e3c4609e
