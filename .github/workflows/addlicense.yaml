@@ -1,28 +1,24 @@
-name: Add License
+---
+name: Lint
 
-on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+on: # yamllint disable-line rule:truthy
+  push: null
+  pull_request: null
 
 permissions:
   contents: read
 
 jobs:
-  add-license:
-    runs-on: ubuntu-latest
+  run-addlicense:
     permissions:
       contents: write
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Pull Addlicense Docker image
+      - name: Pull contianer for addlicense
         run: docker pull ghcr.io/google/addlicense:latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Set your fix mode variables to true
