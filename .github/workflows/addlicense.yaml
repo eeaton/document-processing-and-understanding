@@ -21,8 +21,31 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+          with:
+            fetch-depth: 0
 
       - name: Pull Addlicense Docker image
         run: docker pull ghcr.io/google/addlicense:latest
+
+      - name: Run Addlicense
+        run: |
+          docker run -v $(pwd):/github/workspace ghcr.io/google/addlicense:latest \
+            -f apache \
+            -c "Google LLC" \
+            .
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Commit and push linting fixes
+            # Run only on:
+            # - Pull requests
+            # - Not on the default branch
+            if: >
+              github.event_name == 'pull_request' &&
+              github.ref_name != github.event.repository.default_branch
+            uses: stefanzweifel/git-auto-commit-action@v5
+            with:
+              branch: ${{ github.event.pull_request.head.ref || github.head_ref || github.ref }}
+              commit_message: "chore: add license"
+              commit_user_name: addlicense[bot]
+              commit_user_email: addlicense@addlicense.dev
