@@ -1,0 +1,17 @@
+name: addlicense
+on: # yamllint disable-line rule:truthy
+  push: null
+  pull_request: null
+  workflow_call: null
+
+permissions:
+  pull-requests: read
+jobs:
+  container-test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: pull the addlicense container
+        run: docker pull ghcr.io/google/addlicense:latest
+
+      - name: invoke the addlicense container
+        run: docker run -it ghcr.io/google/addlicense -h
