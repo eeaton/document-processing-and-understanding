@@ -22,3 +22,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Set your fix mode variables to true
+      - name: invoke addlicense
+        run: docker run -v $(pwd):/github/workspace ghcr.io/google/addlicense:latest -f apache -c "Google LLC" .
