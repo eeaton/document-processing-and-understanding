@@ -1,5 +1,5 @@
 ---
-name: Lint
+name: addlicense
 
 on: # yamllint disable-line rule:truthy
   push: null
@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  run-addlicense:
+  addlicense:
     permissions:
       contents: write
     runs-on: ubuntu-latest
@@ -22,10 +22,10 @@ jobs:
         uses: actions/setup-go@v5
 
       - name: Pull contianer for addlicense
-        run: go install github.com/google/addlicense@latest
+        run: docker pull ghcr.io/google/addlicense:latest
 
       - name: invoke addlicense
-        run: addlicense -l "apache" -c "Google LLC" .
+        run: docker run -it -v ${PWD}:/src ghcr.io/google/addlicense -l "apache" -c "Google LLC" .
 
       - name: check if it worked
         run: ls && cat .github/workflows/addlicense.yaml
