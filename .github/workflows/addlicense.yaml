@@ -13,5 +13,8 @@ jobs:
       - name: pull the addlicense container
         run: docker pull ghcr.io/google/addlicense:latest
 
+      - name: ls
+        run: ls
+
       - name: invoke the addlicense container
         run: find . -type d -exec bash -c 'cd "$1" && docker run ghcr.io/google/addlicense -c "Google LLC" -l apache pattern *.*' _ {} \;
