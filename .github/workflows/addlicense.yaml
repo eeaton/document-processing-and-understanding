@@ -25,7 +25,7 @@ jobs:
         run: docker pull ghcr.io/google/addlicense:latest
 
       - name: invoke addlicense
-        run: docker run -it -v ${PWD}:/src ghcr.io/google/addlicense -l "apache" -c "Google LLC" .
+        run: docker run -v ${PWD}:/src ghcr.io/google/addlicense -l "apache" -c "Google LLC" .
 
       - name: check if it worked
         run: ls && cat .github/workflows/addlicense.yaml
