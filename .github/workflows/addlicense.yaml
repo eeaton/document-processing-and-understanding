@@ -14,4 +14,4 @@ jobs:
         run: docker pull ghcr.io/google/addlicense:latest
 
       - name: invoke the addlicense container
-        run: docker run -it ghcr.io/google/addlicense -h
+        run: docker run ghcr.io/google/addlicense -h
