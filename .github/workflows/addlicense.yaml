@@ -26,3 +26,6 @@ jobs:
 
       - name: invoke addlicense
         run: addlicense -l "apache" -c "Google LLC" .
+
+      - name: check if it worked
+        run: ls && cat .github/workflows/addlicense.yaml
