@@ -10,16 +10,28 @@ permissions:
 
 jobs:
   run-addlicense:
+
     permissions:
       contents: write
+
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Pull contianer for addlicense
         run: docker pull ghcr.io/google/addlicense:latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: invoke addlicense
-        run: addlicense -l "apache" -c "Google LLC" .
+        run: docker run -v $(pwd):/github/workspace ghcr.io/google/addlicense:latest -l "apache" -c "Google LLC" .
+      - name: Commit and push linting fixes
+
+      if: >
+        github.event_name == 'pull_request' &&
+        github.ref_name != github.event.repository.default_branch
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        branch: ${{ github.event.pull_request.head.ref || github.head_ref || github.ref }}
+        commit_message: "chore: addlicense"
+        commit_user_name: super-linter
+        commit_user_email: super-linter@super-linter.dev
