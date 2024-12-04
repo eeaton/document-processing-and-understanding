@@ -18,10 +18,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Golang
-        uses: actions/setup-go@v5
-
-      - name: Pull contianer for addlicense
+      - name: Pull container for addlicense
         run: docker pull ghcr.io/google/addlicense:latest
 
       - name: invoke addlicense
@@ -38,8 +35,10 @@ jobs:
           github.event_name == 'pull_request' &&
           github.ref_name != github.event.repository.default_branch
         uses: stefanzweifel/git-auto-commit-action@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           branch: ${{ github.event.pull_request.head.ref || github.head_ref || github.ref }}
-          commit_message: "chore: fix linting issues"
-          commit_user_name: super-linter
-          commit_user_email: super-linter@super-linter.dev
+          commit_message: "chore: add license headers"
+          commit_user_name: addlicense
+          commit_user_email: no-reply@addlicense.dev
