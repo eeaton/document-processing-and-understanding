@@ -26,12 +26,3 @@ jobs:
 
       - name: Pull Addlicense Docker image
         run: docker pull ghcr.io/google/addlicense:latest
-
-      - name: Run Addlicense
-        run: |
-          docker run -v $(pwd):/github/workspace ghcr.io/google/addlicense:latest \
-            -f apache \
-            -c "Google LLC" \
-            .
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
