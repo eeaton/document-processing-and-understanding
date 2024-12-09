@@ -1,17 +1,3 @@
-# Copyright 2024 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 ---
 timeout: 7200s
 steps:
@@ -52,8 +38,7 @@ steps:
         export PROJECT_ID=${_TEST_PROJECT_ID};
         export GOOGLE_IMPERSONATE_SERVICE_ACCOUNT=${_DEPLOYER_SA};
         gcloud config set auth/impersonate_service_account ${_DEPLOYER_SA};
-        go test -v -run ./ -timeout 90m --tags=e2e;
-        gcloud config unset auth/impersonate_service_account;
+        go test -v -run ./ -timeout 90m --tags=e2e
     entrypoint: /bin/bash
     env:
       - "REGION=${_REGION}"
@@ -71,26 +56,22 @@ steps:
       - "-x"
       - "-c"
       - >-
-        ls;
-
-        gcloud storage cp gs://$PROJECT_ID-testdocs/EKS_Test_Scenarios/GoogleQuarterlyResults/* gs://docs-input-${_TEST_PROJECT_ID}/;
-        gcloud storage cp gs://$PROJECT_ID-testdocs/EKS_Test_Scenarios/Test0_Demo_PDFs/* gs://docs-input-${_TEST_PROJECT_ID}/;
-        gcloud storage cp gs://$PROJECT_ID-testdocs/EKS_Test_Scenarios/Test1_Text_Only_PDFs/* gs://docs-input-${_TEST_PROJECT_ID}/;
-        gcloud storage cp gs://$PROJECT_ID-testdocs/EKS_Test_Scenarios/Test2_PDFs_With_Forms/* gs://docs-input-${_TEST_PROJECT_ID}/;
-        gcloud storage cp gs://$PROJECT_ID-testdocs/EKS_Test_Scenarios/Test3_XLS/* gs://docs-input-${_TEST_PROJECT_ID}/;
-        gcloud storage cp gs://$PROJECT_ID-testdocs/EKS_Test_Scenarios/Test4_MSG/* gs://docs-input-${_TEST_PROJECT_ID}/;
-        gcloud storage cp gs://$PROJECT_ID-testdocs/EKS_Test_Scenarios/TEST5_DOCX_Files/* gs://docs-input-${_TEST_PROJECT_ID}/;
-        gcloud storage cp gs://$PROJECT_ID-testdocs/EKS_Test_Scenarios/Test6_EDI_TXT/* gs://docs-input-${_TEST_PROJECT_ID}/;
-        gcloud storage cp gs://$PROJECT_ID-testdocs/EKS_Test_Scenarios/Zebra/* gs://docs-input-${_TEST_PROJECT_ID}/;
-        cd /workspace/sample-deployments/composer-orchestrated-process/;
-        ./scripts/trigger_workflow.sh;
-        cd /workspace/build/test;
-        go test -v -run ./ -timeout 60m --tags=functional;
+        cd /workspace/build/test ;
+        gcloud storage cp gs://$PROJECT_ID-testdocs/EKS_Test_Scenarios/GoogleQuarterlyResults/* gs://docs-input-${_TEST_PROJECT_ID}/ ;
+        gcloud storage cp gs://$PROJECT_ID-testdocs/EKS_Test_Scenarios/Test0_Demo_PDFs/* gs://docs-input-${_TEST_PROJECT_ID}/ ;
+        gcloud storage cp gs://$PROJECT_ID-testdocs/EKS_Test_Scenarios/Test1_Text_Only_PDFs/* gs://docs-input-${_TEST_PROJECT_ID}/ ;
+        gcloud storage cp gs://$PROJECT_ID-testdocs/EKS_Test_Scenarios/Test2_PDFs_With_Forms/* gs://docs-input-${_TEST_PROJECT_ID}/ ;
+        gcloud storage cp gs://$PROJECT_ID-testdocs/EKS_Test_Scenarios/Test3_XLS/* gs://docs-input-${_TEST_PROJECT_ID}/ ;
+        gcloud storage cp gs://$PROJECT_ID-testdocs/EKS_Test_Scenarios/TEST5_DOCX_Files/* gs://docs-input-${_TEST_PROJECT_ID}/ ;
+        gcloud storage cp gs://$PROJECT_ID-testdocs/EKS_Test_Scenarios/Test4_MSG/* gs://docs-input-${_TEST_PROJECT_ID}/ ;
+        gcloud storage cp gs://$PROJECT_ID-testdocs/EKS_Test_Scenarios/Test6_EDI_TXT/* gs://docs-input-${_TEST_PROJECT_ID}/ ;
+        gcloud storage cp gs://$PROJECT_ID-testdocs/EKS_Test_Scenarios/Zebra/* gs://docs-input-${_TEST_PROJECT_ID}/ ;
+        /workspace/sample-deployments-composer-orchestrated-process/scripts/trigger_workflow.sh ;
+        go test -v -run ./ -timeout 60m --tags=functional ;
         # scripts/delete_doc.sh ;
-    entrypoint: /bin/bash
+
     env:
       - "PROJECT_ID=${PROJECT_ID}"
-      - "LOCATION=${_REGION}"
 
   - id: cleanup
     name: "${_BUILDER_IMAGE_NAME}:${_BUILDER_IMAGE_TAG}"
@@ -98,6 +79,7 @@ steps:
       - "-x"
       - "-c"
       - >-
+        gcloud config unset auth/impersonate_service_account;
         gcloud projects delete ${_TEST_PROJECT_ID} --quiet
     entrypoint: /bin/bash
 
