@@ -1,4 +1,4 @@
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,16 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-e2e-test:	## Run the end-to-end test
-	@echo "Running E2E test..."
-	@go test -v -run ./ -timeout 90m --tags=e2e
+terraform {
+  required_version = ">=1.5.7"
 
-functional-test: ## upload documents, trigger workflows, and check the results
-	@echo "running functional test..."
-	@go test -v -run ./ -timeout 60m --tags=functional
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = ">= 5.23.0"
+    }
+    time = {
+      source  = "hashicorp/time"
+      version = "0.12.1"
+    }
+  }
 
-.PHONY: help
-.DEFAULT_GOAL := help
-
-help:
-	@fgrep -h "##" $(MAKEFILE_LIST) | sed -e 's/\(\:.*\#\#\)/\:\ /' | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
+  provider_meta "google" {
+    module_name = "cloud-solutions/dpu-solution-v1.0.0"
+  }
+}
