@@ -15,7 +15,7 @@
 ---
 name: update-python
 
-on: #derp
+on: # yamllint disable-line rule:truthy
   push:
     branches:
       - "dependabot/pip/*"
@@ -39,9 +39,9 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.9"
+          python-version: "3.13"
 
       - name: invoke python updates
         run: ./invoke.sh lock --upgrade
