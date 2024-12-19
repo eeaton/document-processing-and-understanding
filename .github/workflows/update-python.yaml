@@ -15,7 +15,7 @@
 ---
 name: update-python
 
-on:
+on: #derp
   push:
     branches:
       - "dependabot/pip/*"
