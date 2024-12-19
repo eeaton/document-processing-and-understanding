@@ -17,7 +17,7 @@ name: update-python
 
 on:
   push:
-    branches:
+    branches: #derp
       - "dependabot/pip/*"
       - "renovate-bot/pypi*"
   pull_request:
