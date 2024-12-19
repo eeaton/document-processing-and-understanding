@@ -119,12 +119,6 @@ asn1crypto==1.5.1 \
     # via
     #   -c reqs/constraints.txt
     #   scramp
-async-timeout==5.0.1 \
-    --hash=sha256:39e3809566ff85354557ec2398b55e096c8364bacac9405a7a1fa429e77fe76c \
-    --hash=sha256:d9321a7a3d5a6a5e187e824d2fa0793ce379a202935782d555d6e9d2735677d3
-    # via
-    #   -c reqs/constraints.txt
-    #   aiohttp
 attrs==24.3.0 \
     --hash=sha256:8f5c07333d543103541ba7be0e2ce16eeee8130cb0b3f9238ab904ce1e85baff \
     --hash=sha256:ac96cd038792094f438ad1f6ff80837353805ac950cd2aa0e0625ef19850c308
@@ -1049,12 +1043,6 @@ sqlalchemy==1.4.54 \
     # via
     #   -c reqs/constraints.txt
     #   -r components/doc-deletion/src/requirements.in
-typing-extensions==4.12.2 \
-    --hash=sha256:04e5ca0351e0f3f85c6853954072df659d0d13fac324d0072316b67d7794700d \
-    --hash=sha256:1a7ead55c7e559dd4dee8856e3a88b41225abfe1ce8df57b7c13915fe121ffb8
-    # via
-    #   -c reqs/constraints.txt
-    #   multidict
 uritemplate==4.1.1 \
     --hash=sha256:4346edfc5c3b79f694bccd6d6099a322bbeb628dbf2cd86eea55a456ce5124f0 \
     --hash=sha256:830c08b8d99bdd312ea4ead05994a38e8936266f84b9a7878232db50b044e02e

@@ -87,8 +87,6 @@ asn1crypto==1.5.1
     # via scramp
 astroid==3.3.6
     # via pylint
-async-timeout==5.0.1
-    # via aiohttp
 attrs==24.3.0
     # via
     #   aiohttp
@@ -201,12 +199,6 @@ entrypoints==0.4
     # via altair
 et-xmlfile==2.0.0
     # via openpyxl
-eval-type-backport==0.2.0
-    # via apache-airflow
-exceptiongroup==1.2.2
-    # via
-    #   anyio
-    #   cattrs
 extract-msg==0.52.0
     # via processor-msg
 faker==33.1.0
@@ -627,10 +619,7 @@ idna==3.10
 immutabledict==4.2.1
     # via apache-airflow-providers-google
 importlib-metadata==8.5.0
-    # via
-    #   apache-airflow
-    #   flask
-    #   opentelemetry-api
+    # via opentelemetry-api
 inflection==0.5.1
     # via connexion
 invoke==2.2.0
@@ -697,7 +686,7 @@ markupsafe==3.0.2
     #   mako
     #   werkzeug
     #   wtforms
-marshmallow==3.23.1
+marshmallow==3.23.2
     # via
     #   flask-appbuilder
     #   marshmallow-oneofschema
@@ -1169,8 +1158,6 @@ time-machine==2.16.0
     # via pendulum
 toml==0.10.2
     # via streamlit
-tomli==2.2.1
-    # via pylint
 tomlkit==0.13.2
     # via pylint
 toolz==1.0.0
@@ -1183,20 +1170,14 @@ typing-extensions==4.12.2
     # via
     #   alembic
     #   anyio
-    #   asgiref
-    #   astroid
-    #   cattrs
     #   faker
     #   flask-limiter
     #   limits
     #   looker-sdk
-    #   multidict
     #   opentelemetry-sdk
     #   pydantic
     #   pydantic-core
-    #   pylint
     #   pyright
-    #   rich
     #   streamlit
 tzdata==2024.2
     # via
